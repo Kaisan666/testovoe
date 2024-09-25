@@ -1,31 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <div class="wrapper">
-<header class="header">
-    <div class="header_wrapper">
-        <div id="city">
-            
+      <header class="header">
+        <div class="header_wrapper">
+          <div id="weather_img"></div>
+          <div class="weather_temperature_city_wrapper">
+            <div class="weather_temperature_wrapper">
+              <div id="weather"></div>
+              <div id="temperature"></div>
+            </div>
+            <div id="city"></div>
+          </div>
         </div>
-    </div>
-</header>    
-    <main class="main">
+      </header>
+      <main class="main">
         <div class="main_wrapper">
-            <div id="clock"></div>
-            <div id="day"></div>
+          <div id="clock"></div>
+          <div id="day"></div>
         </div>
-    </main>
-    <footer class="footer">
-
+      </main>
+      <footer class="footer">
+        <div class="todoList_outerwrapper">
+          <div class="todoList_wrapper">
+            <div class="todoList">
+              <button class="delete_selected">удалить все</button>
+              <div>
+                <ul>
+                  <!-- <li></li> -->
+                </ul>
+              </div>
+              <input type="text" name="" id="" class="todoInput" />
+            </div>
+        </div>
+        <div class="todoList_btn">Задачи</div>
     </footer>
-
 </div>
-<script src="script.js"></script>
-</body>
+    <script src="script.js"></script>
+    <script src="todoList.js"></script>
+  </body>
 </html>
