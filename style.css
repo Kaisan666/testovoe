@@ -1,3 +1,7 @@
+
+html{
+    font-family: "Montserrat", sans-serif;
+}
 *, *::before, *::after{
     box-sizing: border-box; 
 }
@@ -63,12 +67,17 @@ body, html{
     /* width: 500px; */
     /* display: flex; */
     /* justify-content: center; */
-    font-size: 160px;
+    font-size: clamp(60px, 0px, 160px);
     
 }
 #day{
-    font-size: 48px;
-}
+    font-size: clamp(26px, 0px, 48px);
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    justify-self: center;
+    
+}               
 .header_wrapper{
     display: flex;
     align-items: center;
@@ -128,6 +137,7 @@ body, html{
     flex-direction: column;
     opacity: 0;
     transition: 500ms opacity;
+    /* border-radius: ; */
 }
 .delete_selected{
     width: 100px;
@@ -135,16 +145,57 @@ body, html{
     font-size: 16px;
 }
 .todoInput{
-    margin-top: auto;
-    margin-bottom: 5px;
+    margin:  auto 10px 5px;
 }
+
 .active_wrapper{
     display: block;
 }
 .active_todoList{
     opacity: 1;
-    transition: 500ms opacity;
+    /* transition: 500ms opacity; */
 }
 .todoList_outerwrapper{
     position: relative;
+}
+
+.todo{
+    list-style: none;
+    margin: 5px 5px 15px 10px;
+}
+.delete_selected{
+    width: 85px;
+    padding: 0 5px 0;
+    word-break: break-all;
+    /* outline: none; */
+    border: none;
+    height: auto;
+    margin-top: 7.5px;
+    margin-right: 15px;
+    border-radius: 10px;
+    background-color: rgb(114, 106, 106);
+    color: rgb(211, 211, 211);
+    border: solid black ;
+    cursor: pointer;
+}
+.delete_selected:active{
+    background-color: rgb(37, 36, 36);
+}
+.todo_text{
+    word-break: break-all;
+    /* max-width: 225px; */
+}
+.todo_item_task{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.todo .todo_item:not(:first-child){
+    margin-top: 5px;
+}
+.delete_task{
+    height: 25px;
+}
+.checked span{
+    text-decoration: line-through;
 }

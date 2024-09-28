@@ -1,4 +1,4 @@
-const setImg = function (hoursNow) {
+function setImg(hoursNow) {
   const timesOfDay = {
     morningHours: new Date("December 17, 1995 6:00:00").getHours(),
     dayHours: new Date("December 17, 1995 12:00:00").getHours(),
@@ -29,7 +29,7 @@ const options = {
   day: "numeric",
   weekday: "long",
 };
-const setDayAndTime = function () {
+function setDayAndTime() {
   const date = new Date();
   const hoursNow = date.getHours();
   const time = date.toLocaleTimeString();
@@ -46,7 +46,7 @@ setInterval(setDayAndTime, 1000);
 const CITY_DEFAULT = "Krasnodar";
 
 
-const setCityAndWeather = function (data) {
+function setCityAndWeather(data) {
   const img = document.createElement("img");
   const city = document.getElementById("city");
   const weather = document.getElementById("weather");
@@ -61,7 +61,7 @@ const setCityAndWeather = function (data) {
   document.getElementById("weather_img").appendChild(img);
 };
 
-
+const APIKEY = "bcf17a714cfce1a17a34a7b5b1c99fb8"
 async function GetCity(CITY_DEFAULT) {
   navigator.geolocation.getCurrentPosition(
     async (position) => {
@@ -71,7 +71,7 @@ async function GetCity(CITY_DEFAULT) {
       // const response = await fetch(`https://geocode-maps.yandex.ru/1.x/?apikey=afbd98a0-0f3e-4ee1-a753-6463537773f1&geocode=${longitude},${latitude}&format=json`);
 
       const response = await fetch(
-        `https://api.weatherstack.com/current?access_key=1bcd9d1208eedecb0421b3765625edc7&query=${latitude},${longitude}`
+        `https://api.weatherstack.com/current?access_key=${APIKEY}&query=${latitude},${longitude}`
       );
       const data = await response.json();
 
@@ -87,7 +87,7 @@ async function GetCity(CITY_DEFAULT) {
     async (error) => {
       if(localStorage.getItem('city') !== null){
         const response = await fetch(
-          `https://api.weatherstack.com/current?access_key=1bcd9d1208eedecb0421b3765625edc7&query=${localStorage.getItem('city')}`
+          `https://api.weatherstack.com/current?access_key=${APIKEY}&query=${localStorage.getItem('city')}`
         );
         const data = await response.json();
         setCityAndWeather(data);
@@ -95,7 +95,7 @@ async function GetCity(CITY_DEFAULT) {
       else {
       console.log(CITY_DEFAULT);
       const response = await fetch(
-        `https://api.weatherstack.com/current?access_key=1bcd9d1208eedecb0421b3765625edc7&query=${CITY_DEFAULT}`
+        `https://api.weatherstack.com/current?access_key=${APIKEY}&query=${CITY_DEFAULT}`
       );
       const data = await response.json();
       setCityAndWeather(data);
@@ -105,9 +105,9 @@ async function GetCity(CITY_DEFAULT) {
     }}
   );
 }
-const GetCityInterval = function(){
+function GetCityInterval(){
   return GetCity(CITY_DEFAULT)
 }
-GetCity(CITY_DEFAULT);
+// GetCity(CITY_DEFAULT);
 setInterval(GetCityInterval, 3600000);
 
