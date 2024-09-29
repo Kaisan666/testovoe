@@ -123,7 +123,7 @@ body, html{
 
 }
 .todoList_wrapper{
-    display: block ;
+    display: none ;
 }
 .todoList{
     width: 300px;

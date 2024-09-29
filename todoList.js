@@ -104,11 +104,9 @@ document.querySelector(".todoList_btn").addEventListener("click", (e) => {
   
     todo.innerHTML = tasksToset;
   }
-  if(['Android', 'iPhone', 'iPod', 'iPad', 'BlackBerry'].indexOf(navigator.platform)) {
-    document.addEventListener("click", (e)=>{
-        console.log(e.target)
-        // document.querySelector(".todoList_wrapper").classList.remove("active_wrapper");
-    // setTimeout(() => document.querySelector(".todoList").classList.remove("active_todoList"),1);
-    })
-    console.log("мабилка")
-    }
+  if (/Android|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+    document.addEventListener('click', (e) => {
+      e.stopPropagation();
+      console.log(e.target)
+      
+  })};
