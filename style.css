@@ -64,18 +64,14 @@ body, html{
 
 
 #clock{
-    /* width: 500px; */
-    /* display: flex; */
-    /* justify-content: center; */
-    font-size: clamp(60px, 0px, 160px);
+    font-size: clamp(60px, 10vw, 160px);
     
 }
 #day{
-    font-size: clamp(26px, 0px, 48px);
+    font-size: clamp(26px, 3vw, 48px);
     display: flex;
-    justify-content: center;
-    align-self: center;
     justify-self: center;
+    text-align: center;
     
 }               
 .header_wrapper{
@@ -123,21 +119,17 @@ body, html{
 
 }
 .todoList_wrapper{
-    display: block ;
+    display: none ;
 }
 .todoList{
     width: 300px;
     height: auto;
-    position: absolute;
-    right: 20%;
-    bottom: 100%;
     background-color: rgba(27, 12, 9, 0.699);
     box-shadow: 0 0 10px black;
     display: flex;  
     flex-direction: column;
     opacity: 0;
-    transition: 500ms opacity;
-    /* border-radius: ; */
+    transition: 250ms opacity;
 }
 .delete_selected{
     width: 100px;
@@ -150,10 +142,12 @@ body, html{
 
 .active_wrapper{
     display: block;
+    position: absolute;
+    right: 20%;
+    bottom: 100%;
 }
 .active_todoList{
     opacity: 1;
-    /* transition: 500ms opacity; */
 }
 .todoList_outerwrapper{
     position: relative;
@@ -167,7 +161,6 @@ body, html{
     width: 85px;
     padding: 0 5px 0;
     word-break: break-all;
-    /* outline: none; */
     border: none;
     height: auto;
     margin-top: 7.5px;
@@ -183,7 +176,6 @@ body, html{
 }
 .todo_text{
     word-break: break-all;
-    /* max-width: 225px; */
 }
 .todo_item_task{
     display: flex;
@@ -198,4 +190,25 @@ body, html{
 }
 .checked span{
     text-decoration: line-through;
+}
+
+
+.error{
+    position: absolute;
+    background-color: rgba(255, 0, 0, 0.541);
+    opacity: 0;
+    transition: 250ms opacity;
+    top: -60px;
+    padding: 5px 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    text-align: center;
+    border: solid black;
+    border-radius: 15px;
+}
+
+.error_active{
+    opacity: 1;
+
 }

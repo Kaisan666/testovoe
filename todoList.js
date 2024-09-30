@@ -1,7 +1,15 @@
-document.querySelector(".todoList_btn").addEventListener("click", (e) => {
-    document.querySelector(".todoList_wrapper").classList.toggle("active_wrapper");
-    setTimeout(() => document.querySelector(".todoList").classList.toggle("active_todoList"),1);
-  });
+const todoListWrapper = document.querySelector(".todoList_wrapper")
+const todoListHtml = document.querySelector(".todoList")
+document.querySelector(".todoList_btn").addEventListener("click", () => {
+  if (!todoListWrapper.classList.contains("active_wrapper")){
+  todoListWrapper.classList.add("active_wrapper")
+    setTimeout(() => todoListHtml.classList.add("active_todoList"), 1)
+  }
+  else{
+    todoListHtml.classList.remove("active_todoList")
+    setTimeout(()=> todoListWrapper.classList.remove("active_wrapper"), 100)
+  }})
+
   
   let todoList = [];
   window.onload = () => {
@@ -24,10 +32,8 @@ document.querySelector(".todoList_btn").addEventListener("click", (e) => {
         displayTodo();
         setTodoToLS();
         inputToDo.value = "";
-        console.log(newTodo);
-        console.log(todoList);
       } else {
-        alert("Сначала введите задачу");
+        createError();
       }
     }
   });
@@ -40,7 +46,6 @@ document.querySelector(".todoList_btn").addEventListener("click", (e) => {
       parent.classList.toggle("checked");
       todoList.find((todo) => {
         if (todo.id == taskId) {
-          console.log("ХУЙ");
           if (todo.checked == true) {
             todo.checked = false;
           } else {
@@ -48,8 +53,6 @@ document.querySelector(".todoList_btn").addEventListener("click", (e) => {
           }
         }
       });
-      console.log(taskId);
-      console.log(todoList);
     }
     setTodoToLS()
   }
@@ -57,7 +60,6 @@ document.querySelector(".todoList_btn").addEventListener("click", (e) => {
   todo.addEventListener("click", deleteTask);
   function deleteTask(e) {
     if (e.target.dataset.action == "delete") {
-      console.log("ХУЙ");
       const parent = e.target.closest("li");
       const taskId = Number(parent.id);
       todoList = todoList.filter((todo) => {
@@ -71,20 +73,10 @@ document.querySelector(".todoList_btn").addEventListener("click", (e) => {
   const delete_selectedBtn = document.querySelector(".delete_selected");
   delete_selectedBtn.addEventListener("click", () => {
     todoList = todoList.filter((todo) => {
-      // console.log(todo.checked === true)
       return todo.checked === false;
     });
-    // todoList.find((todo)=>{
-    //     if (todo.checked === true){
-    //         console.log(todo)
-    //         todoList.splice(todoList.indexOf(todo), 1)
-    //         displayTodo()
-  
-    //     }
-    // })
     setTodoToLS();
     displayTodo();
-    console.log(todoList);
   });
   
   function setTodoToLS() {
@@ -93,22 +85,48 @@ document.querySelector(".todoList_btn").addEventListener("click", (e) => {
   function displayTodo() {
     let tasksToset = "";
     todoList.forEach((task) => {
-      tasksToset += `<li class="todo_item ${task.checked === true ? "checked" : ""}" id='${task.id}' >
-                  <div class="todo_item_task">
+      tasksToset += `<li class="todo_item ${task.checked === true ? "checked" : ""} todoElement" id='${task.id}' >
                       <input class="todo_checkbox" type ='checkbox' id='${task.id}' ${task.checked === true ? "checked" : ""}>
                       <span class="todo_text" for="${task.id}">${task.todo}</span>
                       <button class="delete_task" data-action = "delete">🗑️</button>
-                  </div>
               </li>`;
     });
   
     todo.innerHTML = tasksToset;
   }
-  if(['Android', 'iPhone', 'iPod', 'iPad', 'BlackBerry'].indexOf(navigator.platform)) {
+  if(/Android|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
     document.addEventListener("click", (e)=>{
-        console.log(e.target)
-        // document.querySelector(".todoList_wrapper").classList.remove("active_wrapper");
-    // setTimeout(() => document.querySelector(".todoList").classList.remove("active_todoList"),1);
-    })
-    console.log("мабилка")
+      const todoElement = document.querySelectorAll(".todoElement")
+      todoElement.forEach( elem => {
+        elem.addEventListener("click", (e) =>{
+          e.stopPropagation(); // Останавливаем распространение события
+        })
+      })
+        if(todoListHtml.classList.contains("active_todoList")){
+        todoListHtml.classList.remove("active_todoList")
+    setTimeout(()=> todoListWrapper.classList.remove("active_wrapper"), 100)
+  }})
     }
+
+function createError(){
+  
+  const error = `
+  <div class="error">
+    <span>Ошибка</span>
+    <span>Сначала введите задачу</span>
+  </div>
+  `
+  const existingError = document.querySelector(".error");
+    if (existingError) {
+        return
+    }
+  todoListHtml.insertAdjacentHTML("beforebegin", error)
+  setTimeout(()=>document.querySelector(".error").classList.add("error_active"), 100)
+  setTimeout(()=> {
+    const error = document.querySelector(".error")
+    error.classList.remove("error_active")
+    setTimeout(() =>{
+      error.remove()
+    },250)
+  },2000)
+}

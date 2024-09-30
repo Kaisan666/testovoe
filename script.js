@@ -17,8 +17,6 @@ function setImg(hoursNow) {
     imgUrl = "url(images/evening.jpg)";
   }
 
-  // default :
-  //     imgUrl = "url(images/night.jpg)"
   document.body.style.backgroundImage = imgUrl;
   document.body.style.backgroundPosition = "center";
   document.body.style.backgroundSize = "cover";
@@ -57,7 +55,6 @@ function setCityAndWeather(data) {
   city.innerHTML = data.location.region;
   img.src = imgUrl;
   img.alt = data.current.weather_descriptions[0];
-  console.log(img);
   document.getElementById("weather_img").appendChild(img);
 };
 
@@ -66,22 +63,12 @@ async function GetCity(CITY_DEFAULT) {
   navigator.geolocation.getCurrentPosition(
     async (position) => {
       const { latitude, longitude } = position.coords;
-      // console.log(cords)
-      // const response = await fetch(`https://api.weatherbit.io/v2.0/current`);
-      // const response = await fetch(`https://geocode-maps.yandex.ru/1.x/?apikey=afbd98a0-0f3e-4ee1-a753-6463537773f1&geocode=${longitude},${latitude}&format=json`);
-
       const response = await fetch(
         `https://api.weatherstack.com/current?access_key=${APIKEY}&query=${latitude},${longitude}`
       );
       const data = await response.json();
-
-      console.log(data); // Выводим данные
-      // console.log(data.response.GeoObjectCollection.featureMember[0].GeoObject.description.split(",")[0]); //
-      console.log(latitude);
-      console.log(longitude);
       localStorage.setItem("city", `${data.location.region}` )
       setCityAndWeather(data)
-      console.log(localStorage.getItem('city'))
       // const
     },
     async (error) => {
@@ -93,14 +80,11 @@ async function GetCity(CITY_DEFAULT) {
         setCityAndWeather(data);
       }
       else {
-      console.log(CITY_DEFAULT);
       const response = await fetch(
         `https://api.weatherstack.com/current?access_key=${APIKEY}&query=${CITY_DEFAULT}`
       );
       const data = await response.json();
       setCityAndWeather(data);
-
-      console.log(data);
       console.log("что то пошло не так или вы запретили доступ к геопозиции");
     }}
   );
@@ -108,6 +92,5 @@ async function GetCity(CITY_DEFAULT) {
 function GetCityInterval(){
   return GetCity(CITY_DEFAULT)
 }
-// GetCity(CITY_DEFAULT);
-setInterval(GetCityInterval, 3600000);
+GetCity(CITY_DEFAULT);
 
