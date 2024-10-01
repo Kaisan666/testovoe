@@ -58,7 +58,7 @@ function setCityAndWeather(data) {
   document.getElementById("weather_img").appendChild(img);
 };
 
-const APIKEY = "bcf17a714cfce1a17a34a7b5b1c99fb8"
+const APIKEY = "60900bd8fef9389d7de2bb87d94d9f17"
 async function GetCity(CITY_DEFAULT) {
   navigator.geolocation.getCurrentPosition(
     async (position) => {
