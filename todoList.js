@@ -88,9 +88,11 @@ document.querySelector(".todoList_btn").addEventListener("click", () => {
     let tasksToset = "";
     if (todoList.length > 0){
     todoList.forEach((task) => {
-      tasksToset += `<li class="todo_item ${task.checked === true ? "checked" : ""} todoElement" id='${task.id}' >
-                      <input class="todo_checkbox" type ='checkbox' id='${task.id}' ${task.checked === true ? "checked" : ""}>
-                      <span class="todo_text" for="${task.id}">${task.todo}</span>
+      tasksToset += `<li class="todo_item_task ${task.checked === true ? "checked" : ""} todoElement" id='${task.id}' >
+                      <div class="checkbox_text_wrapper">
+                        <input class="todo_checkbox" type ='checkbox' id='${task.id}' ${task.checked === true ? "checked" : ""}>
+                        <span class="todo_text" for="${task.id}">${task.todo}</span>
+                      </div>
                       <button class="delete_task" data-action = "delete">🗑️</button>
               </li>`;
     });

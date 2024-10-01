@@ -122,7 +122,7 @@ body, html{
     display: none ;
 }
 .todoList{
-    width: 300px;
+    width: 350px;
     height: auto;
     background-color: rgba(27, 12, 9, 0.699);
     box-shadow: 0 0 10px black;
@@ -130,14 +130,37 @@ body, html{
     flex-direction: column;
     opacity: 0;
     transition: 250ms opacity;
+    overflow-y: auto;
+    max-height: 65vh;
 }
-.delete_selected{
-    width: 100px;
-    align-self: end;
-    font-size: 16px;
+.todoList::-webkit-scrollbar{
+    border-radius: 10px;
+    background-color: rgba(27, 12, 9, 0.699);
+    width: 10px;
 }
+.todoList::-webkit-scrollbar-thumb{
+    border-radius: 10px;
+    background-color: rgb(102, 80, 65);
+}
+.btn_wrapper{
+    width: 350px;
+    background-color: rgba(27, 12, 9, 0.699);
+    display: flex;
+    justify-content: end;
+}
+.input_wrapper{
+    display: flex;
+    justify-content: center;
+    width: 350px;
+    background-color: rgba(27, 12, 9, 0.699);
+}
+
 .todoInput{
-    margin:  auto 10px 5px;
+    margin: 5px;
+    background: rgba(27, 12, 9, 0);
+    border: none;
+    width: 330px;
+    
 }
 
 .active_wrapper{
@@ -155,7 +178,7 @@ body, html{
 
 .todo{
     list-style: none;
-    margin: 5px 5px 15px 10px;
+    margin: 5px 10px 15px 10px;
 }
 .delete_selected{
     width: 85px;
@@ -165,6 +188,7 @@ body, html{
     height: auto;
     margin-top: 7.5px;
     margin-right: 15px;
+    margin-bottom: 10px;
     border-radius: 10px;
     background-color: rgb(114, 106, 106);
     color: rgb(211, 211, 211);
@@ -174,15 +198,25 @@ body, html{
 .delete_selected:active{
     background-color: rgb(37, 36, 36);
 }
+.checkbox_text_wrapper{
+    display: flex;
+    gap: 5px;
+    align-items: baseline;
+}
+.todo_checkbox{
+    border-radius: 5px;
+}
 .todo_text{
+    display: inline-block;
     word-break: break-all;
 }
 .todo_item_task{
     display: flex;
-    align-items: center;
+    text-align: start;
+    justify-content: space-between;
     gap: 5px;
 }
-.todo .todo_item:not(:first-child){
+.todo .todo_item_task:not(:first-child){
     margin-top: 5px;
 }
 .delete_task{
@@ -190,6 +224,7 @@ body, html{
 }
 .checked span{
     text-decoration: line-through;
+    color: rgb(131, 131, 131);
 }
 
 
