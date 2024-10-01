@@ -13,7 +13,9 @@ document.querySelector(".todoList_btn").addEventListener("click", () => {
   
   let todoList = [];
   window.onload = () => {
+    if (localStorage.getItem("todoList") !== null){
     todoList = JSON.parse(localStorage.getItem("todoList"));
+  }
     displayTodo();
   };
   
@@ -84,6 +86,7 @@ document.querySelector(".todoList_btn").addEventListener("click", () => {
   }
   function displayTodo() {
     let tasksToset = "";
+    if (todoList.length > 0){
     todoList.forEach((task) => {
       tasksToset += `<li class="todo_item ${task.checked === true ? "checked" : ""} todoElement" id='${task.id}' >
                       <input class="todo_checkbox" type ='checkbox' id='${task.id}' ${task.checked === true ? "checked" : ""}>
@@ -93,6 +96,7 @@ document.querySelector(".todoList_btn").addEventListener("click", () => {
     });
   
     todo.innerHTML = tasksToset;
+  }
   }
   if(/Android|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
     document.addEventListener("click", (e)=>{
