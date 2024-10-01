@@ -33,6 +33,7 @@ document.querySelector(".todoList_btn").addEventListener("click", () => {
         todoList.push(newTodo);
         displayTodo();
         setTodoToLS();
+        todoListHtml.scrollTop = todoListHtml.scrollHeight;
         inputToDo.value = "";
       } else {
         createError();
